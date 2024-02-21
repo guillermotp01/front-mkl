@@ -1,0 +1,100 @@
+<div class="text">
+    <h1>Usuarios</h1>    
+</div>
+
+<div class="text herramientas">
+    <div>
+        <i class='bx bx-filter icon'></i>
+        <span>Filtrar</span>
+    </div>
+
+    <div>
+        <span>Buscar...</span>
+        <i class='bx bx-search icon' ></i>
+    </div>
+</div>
+
+<section class="text productos">
+    <div *ngFor="let item of listUsuarios" class="producto">
+        <div class="detalle-usuario">
+            <span class="info-usuario">
+                <strong>
+                    Id Usuario: 
+                </strong>
+                <p>{{item.idUsuario}}</p>
+            </span>
+            <span>
+                <a class="button" (click)="modalActualizar(item)">
+                    <i class='bx bx-edit icon'></i>
+                </a>
+                <a class="button" (click)="modalEliminar(item.idUsuario)">
+                    <i class='bx bx-trash icon' ></i>
+                </a>
+            </span>
+        </div>
+
+        <span class="info-usuario">
+            <strong>
+                Nombre:
+            </strong>
+            <p>{{item.nombre}}</p>
+        </span>
+
+        <span>
+            <strong>
+                Correo:
+            </strong>
+            <p>{{item.correo}}</p>
+        </span>
+    </div>
+</section>
+
+<!-- MODAL PARA ACTUALIZAR USUARIO -->
+<div class="modal" *ngIf="showModalActualizarUsuario">
+    <div class="modal-content text">
+        <div class="modal-header">
+            <h2>Actualizar Usuario</h2>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formUsuario">
+                <div class="form-content">
+                    <strong>
+                        Nombre: 
+                    </strong>
+                    <input type="text" formControlName="nombre">
+                </div>
+                <div class="form-content">
+                    <strong>
+                        Correo: 
+                    </strong>
+                    <input type="text" formControlName="correo">
+                </div>
+                <div class="form-content">
+                    <strong>
+                        Password: 
+                    </strong>
+                    <input type="text" formControlName="password">
+                </div>
+            </form>
+            <div class="modal-footer">
+                <a class="button" (click)="cancelar()">Cancelar</a>
+                <a class="button" (click)="update()">Actualizar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL PARA ELIMINAR USUARIO -->
+<div class="modal" *ngIf="showModalEliminarUsuario">
+    <div class="modal-content text">
+        <div class="modal-header">
+            <i class='bx bx-error'></i>
+            <h2>¿Deseas eliminar este usuario?</h2>
+        </div>
+        <div class="modal-footer">
+            <a class="button" (click)="delete()">Sí</a>
+            <a class="button" (click)="cancelar()">No</a>
+        </div>
+    </div>
+</div>

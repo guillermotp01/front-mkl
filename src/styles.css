@@ -1,1 +1,478 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Arya:wght@400;700&family=Autour+One&family=Barlow:wght@300;400;600;700&family=Montserrat:wght@300;400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    --body-color: #E5E1DA;
+    --sidenav-color: #FBF9F1;
+    --primary-color: #B19470;
+    --primary-color-light:#E5E1DA;
+    --toogle-color: #DDDDDD;
+    --text-color: #707070;
+
+    --tran-03: all 0.2s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.4s ease;
+}
+
+body{
+    min-height: 100vh;
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
+
+::selection{
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+}
+
+body.dark{
+    --body-color: #18191A;
+    --sidenav-color: #242526;
+    --primary-color-light: #3A3B3C;
+    --toggle-color: #FFFFFF;
+    --text-color: #CCCCCC;
+}
+/* ==================  BARRA DE NAVEGACION ================== */
+
+.sidenav{
+    background: var(--sidenav-color);
+    transition: var(--tran-05);
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 5rem;
+    height: 100vh;
+}
+
+.logo-container{
+    display: flex;
+    margin-top: 1rem;
+    align-items: center;
+    padding: 0.938rem 0.938rem 0 0.938rem;
+    width: 100%;
+}
+
+.logo-container .logo{
+    background: var(--primary-color);
+    text-align: center;
+    width: 3rem;
+    min-width: 3rem;
+    border-radius: 0.313rem;
+    padding: 0.1rem;
+    font-size: 26px;
+    font-weight: 900;
+    cursor: pointer;
+    border: none;
+}
+
+.logo-container .logo i{
+    color: var(--sidenav-color);
+}
+
+.logo-container .logo-text{
+    margin-left: 1.5rem;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.sidenav-collapsed{
+    width: 16rem;
+}
+
+.sidenav-nav{
+    list-style: none;
+    padding: 0.938rem;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100% - 3.65rem);
+    cursor: pointer;
+}
+
+.sidenav-nav-item{
+    margin-top: 1.2rem;
+    width: 100%;
+}
+
+.sidenav-nav-link{
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 0.625rem;
+    transition: var(--tran-05);
+}
+
+.sidenav-link-icon{
+    font-size: 26px;
+    width: 2rem;
+    min-width: 2rem;
+    margin: 0 0.5rem;
+    text-align: center;
+}
+
+.sidenav-link-text{
+    font-size: 18px;
+    margin-left: 1.5rem;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.sidenav-nav-item:hover .sidenav-nav-link {
+    background-color: var(--primary-color);
+    color: var(--sidenav-color);
+}
+
+.active{
+    background-color: var(--primary-color);
+}
+
+.active .sidenav-link-icon,
+.active .sidenav-link-text{
+    color: var(--sidenav-color);
+}
+
+
+/* ==================  INICIO ================== */
+.home {
+    width: calc(100% - 5rem);
+    height: 100vh;
+    margin-left: 5rem;
+    z-index: 0;
+    position: relative;
+    top: 0;
+    transition: var(--tran-05);
+}
+
+.home-trimmed{
+    width: calc(100% - 16.5625rem);
+    margin-left: 16.5625rem;
+}
+
+.home-md-screen{
+    width: calc(100% - 5rem);
+    margin-left: 5rem;
+}
+
+.sidenav.close ~ .home {
+    left: 78px;
+    height: 100vh;
+    width: calc(100% - 78px);
+}
+
+.text{
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 12px 60px;
+}
+
+body.dark .home .text{
+    color: var(--text-color);
+}
+
+a{
+    text-decoration: none;
+    margin: 1px;
+}
+/* ==================  DASHBOARD ================== */
+
+
+.valores {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 24px;
+    margin-top: 36px;
+}
+
+.home .text .valores li{
+    padding: 24px;
+    background-color: var(--sidenav-color);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    grid-gap: 24px;
+    cursor: pointer;
+}
+
+.info{
+    font-size: 17px;
+}
+
+main .bottom-data{
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 100%;
+}
+
+main .bottom-data>div{
+    border-radius: 20px;
+    background: var(--sidenav-color);
+    padding: 24px;
+    overflow-x: auto;
+}
+
+main .bottom-data .header{
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+    margin-bottom: 24px;
+}
+
+main .bottom-data .header h3{
+    margin-right: auto;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+main .bottom-data .header .bx{
+    cursor: pointer;
+}
+
+main .bottom-data .orders{
+    flex-grow: 1;
+    flex-basis: 500px;
+}
+
+main .bottom-data .orders table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+main .bottom-data .orders table th{
+    padding-bottom: 12px;
+    font-size: 16px;
+    text-align: left;
+    border-bottom: 1px solid gray;
+}
+
+main .bottom-data .orders table td{
+    padding: 16px 0;
+}
+
+main .bottom-data .orders table tbody tr{
+    transition: all 0.3s ease;
+    font-size: 15px;
+}
+
+
+main .bottom-data .reminders{
+    flex-grow: 1;
+    flex-basis: 300px;
+}
+
+main .bottom-data .reminders .task-list{
+    width: 100%;
+}
+
+main .bottom-data .reminders .task-list li{
+    width: 100%;
+    margin-bottom: 16px;
+    background: var(--sidenav-color);
+    padding: 14px 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main .bottom-data .reminders .task-list li .task-title{
+    display: flex;
+    align-items: center;
+}
+
+main .bottom-data .reminders .task-list li .task-title p{
+    margin-left: 6px;
+}
+
+main .bottom-data .reminders .task-list li .bx{
+    cursor: pointer;  
+}
+
+main .bottom-data .reminders .task-list li.completed{
+    border-left: 10px solid var(--success);
+}
+
+main .bottom-data .reminders .task-list li.not-completed{
+    border-left: 10px solid var(--danger);
+}
+
+main .bottom-data .reminders .task-list li:last-child{
+    margin-bottom: 0;
+}
+
+
+/* ==================  PRODUCTOS - USUARIOS================== */
+
+.productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));;
+}
+
+.producto{
+    background-color: var(--sidenav-color); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    font-size: 17px;
+    padding: 1rem;
+    margin: 10px;
+}
+
+.info-usuario, .info-producto{
+    display: flex;
+    align-items: center;
+}
+
+
+
+span {
+    margin-bottom: 5px;
+}
+
+strong{
+    margin-right: 10px;
+}
+
+.button {
+    background-color: var(--primary-color);
+    cursor: pointer;
+    border: none;
+    padding: 5px 10px; 
+    font-size: 17px;
+    border-radius: 5px; 
+    color: var(--sidenav-color);
+}
+
+.button:hover {
+    background-color: #8b6e4b; 
+}
+
+.detalle-usuario, .encabezado-producto{
+    display: flex;
+    justify-content: space-between;
+    align-items:normal;
+}
+
+body.dark .producto {
+    background-color: #3A3B3C;
+}
+
+body.dark .button{
+    color: var(--primary-color-light);
+}
+
+
+
+.herramientas {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.detalle-producto{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 10px;
+}
+
+.detalle-producto select { 
+    margin-left: 2rem;
+    width: 50%; 
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    justify-content: end;
+    background-color: transparent;
+}
+
+.detalle-producto option { 
+    text-align: center;
+}
+
+
+
+/* ==================  AGREGAR PRODUCTOS ================== */
+
+
+/* ==================  LISTA DE VENTAS ================== */
+
+.lista .ventas{
+    background: var(--sidenav-color);
+    border-radius: 16px;
+    padding: 1rem;
+}
+
+.lista .ventas table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lista .ventas th{
+    border-bottom: 1px solid gray; 
+    font-size: 23px;
+}
+
+.lista .ventas td{
+    font-size: 20px;
+    padding: 16px 0;
+    text-align: center;   
+}
+
+.lista .ventas .button{
+    color: var(--body-color);
+}
+
+/* ==================  MODAL ================== */
+
+.modal-header{
+    margin-bottom: 15px;
+}
+
+.modal-header i{
+    font-size: 50px;
+}
+
+.modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    background-color: var(--body-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    font-size: 15px;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.form-content input{
+    background-color: var(--sidenav-color);
+    border: none;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 80%;
+    outline: none;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+.modal-footer{
+    margin-top: 15px;
+}
