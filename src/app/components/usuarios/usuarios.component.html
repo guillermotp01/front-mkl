@@ -1,8 +1,9 @@
-<div class="text">
-    <h1>Usuarios</h1>    
-</div>
+<div [ngClass]="{'modal-background-blur': showModalActualizarUsuario || showModalEliminarUsuario}">    
+    <div class="text">
+        <h1>Usuarios</h1>    
+    </div>
 
-<div class="text herramientas">
+    <div class="text herramientas">
     <div>
         <i class='bx bx-filter icon'></i>
         <span>Filtrar</span>
@@ -12,9 +13,9 @@
         <span>Buscar...</span>
         <i class='bx bx-search icon' ></i>
     </div>
-</div>
+    </div>
 
-<section class="text productos">
+    <section class="text productos">
     <div *ngFor="let item of listUsuarios" class="producto">
         <div class="detalle-usuario">
             <span class="info-usuario">
@@ -47,7 +48,8 @@
             <p>{{item.correo}}</p>
         </span>
     </div>
-</section>
+    </section>
+</div>
 
 <!-- MODAL PARA ACTUALIZAR USUARIO -->
 <div class="modal" *ngIf="showModalActualizarUsuario">

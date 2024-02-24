@@ -1,14 +1,11 @@
+import { ColorModel } from "./colores-model";
+
 export class ProductoModel {
+    idProducto: number = 0;
     nombre: string = "";
-    descripcion: string = "";
-    existencia: {
-        [talla: string]: {
-            colores: {
-            [color: string]: {
-                cantidad: number;
-                precio: number;
-                };
-            };
-        };
-    } = {};
+    descripcion: string = "";;
+    precio: number = 0;
+    colores: ColorModel[] = []; 
 }
+
+

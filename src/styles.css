@@ -383,6 +383,14 @@ body.dark .button{
     margin-top: 10px;
 }
 
+.agregar{
+    text-align: end;
+}
+
+.agregar .button{
+    padding: 0.8rem;
+}
+
 .detalle-producto{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -475,4 +483,8 @@ body.dark .button{
 
 .modal-footer{
     margin-top: 15px;
+}
+
+.modal-background-blur {
+    filter: blur(5px);  
 }

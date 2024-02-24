@@ -4,131 +4,109 @@
 
 <div class="text herramientas">
     <div>
-        <i class='bx bx-filter icon'></i>
-        <span>Filtrar</span>
+        <i class='bx bx-search icon' ></i>
+        <span>Buscar...</span>
     </div>
 
     <div>
-        <span>Buscar...</span>
-        <i class='bx bx-search icon' ></i>
+        <i class='bx bx-filter icon'></i>
+        <span>Filtrar</span>
     </div>
 </div>
 
+<div class="text agregar">
+    <a class="button">Agregar Producto</a>
+</div>
 
-<section class="text productos">
+<section class="text productos" *ngFor="let producto of listProductos">
     <div class="producto">
         <div class="detalle-usuario">
             <span class="info-usuario">
-                <h3>Polo Manga Corta</h3>
+                <h3>{{producto.nombre}}</h3>
             </span>
             <span>
-                <a class="button">
+                <a class="button" (click)="modalActualizar(producto)">
                     <i class='bx bx-edit icon'></i>
                 </a>
-                <a class="button">
-                    <i class='bx bx-trash icon' ></i>
+                <a class="button" (click)="modalEliminar(producto.idProducto)">
+                    <i class='bx bx-trash icon'></i>
                 </a>
             </span>
+        </div>
+        <div>
+            <span>{{producto.descripcion}}</span>
         </div>
 
         <div class="detalle-producto">
-            <span>Código : A001</span>
+            <span>Cod. Prod: {{producto.idProducto}}</span>
 
-            <span>Talla : 
-                <select id="talla" name="talla">
-                    <option value="s">S</option>
-                    <option value="m">M</option>
-                    <option value="l">L</option>
-                    <option value="xl">XL</option>
+            <span>Color: 
+                <select id="colores" (change)="onColorSelected($event)">
+                    <option *ngFor="let color of producto.colores" [value]="color.nombre">{{ color.nombre }}</option>
                 </select>
             </span>
+
+            <span>Precio: S/. {{producto.precio}}</span>
         
-            <span>Color : Negro</span>
-            
-            <span>Stock : 13</span>
-
-            <span>Precio : S/. 50</span>
-
-            <span>Código de Barras: 1826237</span>
+            <span>Código de Barras: {{getCodigoBarras(producto.idProducto)}}</span>
         </div>
-    </div>
-
-    <div class="producto">
-        <div class="detalle-usuario">
-            <span class="info-usuario">
-                <h3>Polo Manga Corta</h3>
-            </span>
-            <span>
-                <a class="button">
-                    <i class='bx bx-edit icon'></i>
-                </a>
-                <a class="button">
-                    <i class='bx bx-trash icon' ></i>
-                </a>
-            </span>
-        </div>
-
-        <div class="detalle-producto">
-            <span>Código : A001</span>
-
-            <span>Talla : 
-                <select id="talla" name="talla">
-                    <option value="s">S</option>
-                    <option value="m">M</option>
-                    <option value="l">L</option>
-                    <option value="xl">XL</option>
-                </select>
-            </span>
-        
-            <span>Color : Negro</span>
-            
-            <span>Stock : 13</span>
-
-            <span>Precio : S/. 50</span>
-
-            <span>Código de Barras: 1826237</span>
+        <div *ngIf="selectedColor">
+            <h4>Tallas y Cantidades:</h4>
+            <div *ngFor="let talla of getTallasPorColor(selectedColor)">
+                {{ talla.talla }} - Cantidad: {{ talla.cantidad }}
+            </div>
         </div>
     </div>
 </section>
 
-<!--TODO: Modals 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h1 *ngIf="!updateMode" class="modal-title fs-5">Nuevo Usuario</h1>
-              <h1 *ngIf="updateMode" class="modal-title fs-5">Actualizar Usuario</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="newUsuario()"></button>
-            </div>
-            <div class="modal-body">
-                <form [formGroup]="formUsuario">
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label">Nombre: </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" formControlName="nombre">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label">Correo: </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" formControlName="correo">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label">Password: </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" formControlName="password">
-                        </div>
-                    </div>
-                </form>
-                <div class="modal-footer">
-                    <a class="button">Close</a>
-                    <a class="button" *ngIf="!updateMode" (click)="save()">Save</a>
-                    <a class="button" *ngIf="updateMode" (click)="update()">Update</a>
+
+<!-- MODAL PARA ACTUALIZAR PRODUCTO -->
+<div class="modal" *ngIf="showModalActualizarProducto">
+    <div class="modal-content text">
+        <div class="modal-header">
+            <h2>Actualizar Producto</h2>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formProducto">
+                <div class="form-content">
+                    <strong>
+                        Nombre:
+                    </strong>
+                    <input type="text" formControlName="nombre">
                 </div>
+                <div class="form-content">
+                    <strong>
+                        Descripcion
+                    </strong>
+                    <input type="text" formControlName="descripcion">
+                </div>
+                <div class="form-content">
+                    <strong>
+                        Precio:
+                    </strong>
+                    <input type="number" formControlName="precio">
+                </div>
+            </form>
+            <div class="modal-footer">
+                <a class="button" (click)="cancelar()">Cancelar</a>
+                <a class="button" (click)="update()">Actualizar</a>
             </div>
         </div>
     </div>
 </div>
 
--->
+
+
+<!-- MODAL PARA ELIMINAR USUARIO -->
+<div class="modal" *ngIf="showModalEliminarProducto">
+    <div class="modal-content text">
+        <div class="modal-header">
+            <i class='bx bx-error'></i>
+            <h2>¿Deseas eliminar este Producto?</h2>
+        </div>
+        <div class="modal-footer">
+            <a class="button" (click)="delete()">Sí</a>
+            <a class="button" (click)="cancelar()">No</a>
+        </div>
+    </div>
+</div>
