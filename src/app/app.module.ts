@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
 import { HttpClientModule} from '@angular/common/http';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NavegacionComponent } from './components/navegacion/navegacion.component';
 import { PrincipalComponent } from './components/principal/principal.component';
 import { ProductosComponent } from './components/productos/productos.component';
@@ -31,7 +31,8 @@ import { SesionComponent } from './components/sesion/sesion.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
