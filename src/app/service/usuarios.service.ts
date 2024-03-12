@@ -16,8 +16,9 @@ export class UsuariosService {
   
   }
 
-  getUsuarios(): Observable<UsuariosModel[]>{
-    return this.httpClient.get<UsuariosModel[]>(this.URL_API + 'usuario/listarUsuarios').pipe(map(res => res));
+  getUsuarios(page: number, size: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.URL_API}usuario/listarUsuarios?page=${page}&size=${size}`)
+      .pipe(map(res => res));
   }
 
   saveUsuarios(request: any): Observable<any>{

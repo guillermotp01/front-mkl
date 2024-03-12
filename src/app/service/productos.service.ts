@@ -15,8 +15,8 @@ export class ProductosService {
   
   }
 
-  getProducto(): Observable<ProductoModel[]> {
-    return this.httpClient.get<ProductoModel[]>(this.URL_API + 'producto/listarProducto')
+  getProducto(page: number, size: number): Observable<any> {
+    return this.httpClient.get<ProductoModel[]>(`${this.URL_API}producto/listarProducto?page=${page}&size=${size}`)
       .pipe(
         catchError(error => {
           console.error('Error al obtener productos', error);

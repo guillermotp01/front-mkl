@@ -1,0 +1,26 @@
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form action="">
+                <h1>Crear Cuenta</h1>
+                <span>Registrate aquí</span>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre" />
+                <input type="email" id="correo" name="correo" placeholder="Correo" />
+                <input type="password" id="password" name="password" placeholder="Contraseña" />
+                <button>Registrar</button>
+            </form>
+        </div>
+
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-right">
+                    <h1>Bienvenido</h1>
+                    <p>Ingrese con sus detalles personales</p>
+                    <button [routerLink]="'/cerrarSesion'" class="hidden" id="login">
+                    Ingresar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

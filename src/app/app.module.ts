@@ -14,6 +14,7 @@ import { RealizarVentaComponent } from './components/realizar-venta/realizar-ven
 import { ListarVentasComponent } from './components/listar-ventas/listar-ventas.component';
 import { BodyComponent } from './components/body/body.component';
 import { SesionComponent } from './components/sesion/sesion.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SesionComponent } from './components/sesion/sesion.component';
     RealizarVentaComponent,
     ListarVentasComponent,
     BodyComponent,
-    SesionComponent
+    SesionComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,

@@ -23,6 +23,9 @@ export class ProductosComponent {
   nuevoColor: ColorModel = new ColorModel();
   nuevaTalla: TallaModel = new TallaModel();
 
+  currentPage: number = 0;
+  pageSize: number = 6; 
+
   constructor(private productoService: ProductosService, private fb: FormBuilder) {
   
   }
@@ -50,10 +53,10 @@ export class ProductosComponent {
     this.nuevaTalla = new TallaModel();
   }
 
-  list(){
-    this.productoService.getProducto().subscribe(resp=>{
-      if(resp){
-        this.listProductos = resp;
+  list() {
+    this.productoService.getProducto(this.currentPage, this.pageSize).subscribe(resp => {
+      if (resp) {
+        this.listProductos = resp.content;
       }
     });
   }
@@ -61,8 +64,7 @@ export class ProductosComponent {
   save() {
     this.productoService.saveProducto(this.producto).subscribe(resp => {
       if (resp) {
-        this.list();
-        this.formProducto.reset();
+        this.list();  
       }
     });
     this.showModalActualizarProducto = false;
@@ -91,7 +93,13 @@ export class ProductosComponent {
   newProducto(){
     this.updateMode = false;
     this.showModalActualizarProducto = true;
-    this.formProducto.reset();
+    this.producto = {
+      idProducto: 0,
+      nombre: '',
+      descripcion: '',
+      precio: 0,
+      colores: []
+    };
   }
 
   modalActualizar(item: any): void {
@@ -99,10 +107,13 @@ export class ProductosComponent {
     this.showModalActualizarProducto = true;
     this.showModalEliminarProducto = false;
 
-    this.formProducto.controls['idProducto'].setValue(item.idProducto)
-    this.formProducto.controls['nombre'].setValue(item.nombre)
-    this.formProducto.controls['descripcion'].setValue(item.descripcion)
-    this.formProducto.controls['precio'].setValue(item.precio)
+    this.producto = {
+      idProducto: item.idProducto,
+      nombre: item.nombre,
+      descripcion: item.descripcion,
+      precio: item.precio,
+      colores: [...item.colores]
+    };
   }
 
   modalEliminar(id: number) {
@@ -127,7 +138,6 @@ export class ProductosComponent {
   
     return colorSeleccionado ? colorSeleccionado.tallas : [];
   }
-  
 
   onColorSelected(event: any, productoId: number) {
     this.selectedColor = event.target.value;
@@ -153,5 +163,10 @@ export class ProductosComponent {
         tallasArray.push(tallaGroup);
       }
     }
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.list();
   }
 }

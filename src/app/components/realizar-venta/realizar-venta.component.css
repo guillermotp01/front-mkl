@@ -1,0 +1,86 @@
+
+.ventas .contenido{
+    background: var(--sidenav-color);
+    border-radius: 16px;
+    padding: 2rem;
+    font-size: 20px;
+}
+
+.datos{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 20px;
+    margin-bottom: 1rem;
+}
+
+.datos label{
+    margin: 10px;
+}
+
+.datos input,
+.datos select{
+    background-color: var(--body-color);
+    border: none;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 8px;
+    outline: none;
+    color: var(--text-color);
+    width: 30%;
+}
+
+.acciones {
+    text-align: center;
+}
+
+.acciones a{
+    margin: 1rem
+}
+
+.form-venta{
+    display: flex;
+    justify-content: space-between;
+    padding: 0rem 4rem 0rem 4rem;
+}
+
+.lista-productos{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    max-height: 225px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.lista-productos table{
+    width: 80%;
+    border-collapse: collapse;
+    margin: 10px;
+}
+
+.lista-productos::-webkit-scrollbar {
+    width: 7px; 
+}
+
+.lista-productos::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color); 
+    border-radius: 6px;
+}
+
+.lista-productos::-webkit-scrollbar-track {
+    background-color: var(--sidenav-color);
+    border-radius: 6px;
+}
+
+
+.lista-productos table thead tr th{
+    padding-bottom: 12px;
+    border-bottom: 1px solid gray;
+}
+
+.lista-productos table tbody tr td{
+    padding: 12px;
+}
+
+
+

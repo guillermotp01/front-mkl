@@ -41,7 +41,7 @@
             <p>{{item.nombre}}</p>
         </span>
 
-        <span>
+        <span class="info-usuario">
             <strong>
                 Correo:
             </strong>
@@ -49,6 +49,11 @@
         </span>
     </div>
     </section>
+    <div class="pagination">
+        <button class="btn-pagination" [disabled]="currentPage === 0" (click)="onPageChange(currentPage - 1)">Anterior</button>
+        <span>{{ currentPage + 1 }}</span>
+        <button class="btn-pagination" [disabled]="listUsuarios.length < pageSize" (click)="onPageChange(currentPage + 1)">Siguiente</button>
+    </div>
 </div>
 
 <!-- MODAL PARA ACTUALIZAR USUARIO -->

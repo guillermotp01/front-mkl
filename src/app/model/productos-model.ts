@@ -6,6 +6,7 @@ export class ProductoModel {
     descripcion: string = "";;
     precio: number = 0;
     colores: ColorModel[] = []; 
+    selectedColor?: string;
 }
 
 

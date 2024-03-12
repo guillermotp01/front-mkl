@@ -6,6 +6,7 @@ import { ProductosComponent } from './components/productos/productos.component';
 import { RealizarVentaComponent } from './components/realizar-venta/realizar-venta.component';
 import { ListarVentasComponent } from './components/listar-ventas/listar-ventas.component';
 import { SesionComponent } from './components/sesion/sesion.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'cerrarSesion', pathMatch: 'full'},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'productos', component: ProductosComponent},
   {path: 'realizarVenta', component: RealizarVentaComponent},
   {path: 'listarVenta', component: ListarVentasComponent},
-  {path: 'cerrarSesion',component: SesionComponent}
+  {path: 'cerrarSesion',component: SesionComponent},
+  {path: 'registro', component: RegistroComponent }
 ];
 
 @NgModule({

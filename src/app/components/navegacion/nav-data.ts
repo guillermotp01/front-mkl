@@ -28,5 +28,5 @@ export const navbarData = [
         routeLink: 'cerrarSesion',
         icon: 'bx bx-log-out icon',
         label: 'Cerrar Sesion'
-    },
+    }
 ];

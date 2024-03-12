@@ -17,6 +17,10 @@
     </div>
     
     <div class="text agregar">
+        <span>
+            <i class='bx bx-error icon'></i>
+            Seleccione un color para visualizar el stock actual
+        </span>
         <a class="button" (click)="newProducto()">Agregar Producto</a>
     </div>
     
@@ -44,6 +48,7 @@
     
                 <span>Color: 
                     <select id="colores" (change)="onColorSelected($event, producto.idProducto)">
+                        <option disabled selected value="selecciona">--Color--</option>
                         <option *ngFor="let color of producto.colores" [value]="color.nombre">{{ color.nombre }}</option>
                     </select>
                 </span>
@@ -65,6 +70,12 @@
             </div>
         </div>
     </section>
+
+    <div class="pagination">
+        <button class="btn-pagination" [disabled]="currentPage === 0" (click)="onPageChange(currentPage - 1)">Anterior</button>
+        <span>{{ currentPage + 1 }}</span>
+        <button class="btn-pagination" [disabled]="listProductos.length < pageSize" (click)="onPageChange(currentPage + 1)">Siguiente</button>
+    </div>
 </div>
 
     <!-- MODAL PARA ACTUALIZAR PRODUCTO -->
@@ -119,7 +130,7 @@
     
                             <div class="form-content">
                                 <label for="cantidad{{i}}">Cantidad:</label>
-                            <input type="number" [(ngModel)]="talla.cantidad" id="cantidad{{i}}" name="cantidad{{i}}" />
+                                <input type="number" [(ngModel)]="talla.cantidad" id="cantidad{{i}}" name="cantidad{{i}}" />
                             </div>
                         </div>
                     </div>

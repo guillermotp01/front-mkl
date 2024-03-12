@@ -385,7 +385,12 @@ body.dark .button{
 }
 
 .agregar{
-    text-align: end;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    align-items: end;
+    margin: 10px;
+    color : var(--primary-color);
 }
 
 .agregar .button{
@@ -429,9 +434,6 @@ body.dark .button{
     background-color: var(--primary-color);
     color: var(--sidenav-color);
 }
-
-
-/* ==================  AGREGAR PRODUCTOS ================== */
 
 
 /* ==================  LISTA DE VENTAS ================== */
@@ -478,7 +480,6 @@ body.dark .button{
     overflow: auto;
     margin: 10px;
 }
-
 
 .modal-body::-webkit-scrollbar {
     width: 7px; 
@@ -548,4 +549,42 @@ body.dark .button{
 .forms{
     display: grid;
     grid-template-columns: repeat(2, 2fr);
+}
+
+
+/*============ PAGINACION =============*/
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.btn-pagination {
+    padding: 10px 15px;
+    margin: 0 5px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-pagination:hover {
+    background-color: #a18460;
+}
+
+.btn-pagination:disabled {
+    background-color: #999999;
+    color: #ffffff;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    margin: 0 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--text-color);
 }

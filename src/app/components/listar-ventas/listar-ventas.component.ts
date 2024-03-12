@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ListarVentasService } from '../../service/listar-ventas.service';
 
 @Component({
   selector: 'app-listar-ventas',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrl: './listar-ventas.component.css'
 })
 export class ListarVentasComponent {
+  currentPage: number = 0;
+  pageSize: number = 6; 
 
+  constructor(private ventasService: ListarVentasService){
+  
+  }
+
+
+
+  
 }

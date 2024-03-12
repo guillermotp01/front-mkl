@@ -16,6 +16,8 @@ export class UsuariosComponent implements OnInit {
   showModalEliminarUsuario: boolean = false;
   idUsuarioEliminar: number = 0;
   formUsuario: FormGroup = new FormGroup({});
+  currentPage: number = 0;
+  pageSize: number = 6; 
 
   constructor(private usuarioService: UsuariosService) {
   
@@ -31,13 +33,15 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  list(){
-    this.usuarioService.getUsuarios().subscribe(resp=>{
-      if(resp){
-        this.listUsuarios = resp;
+
+  list() {
+    this.usuarioService.getUsuarios(this.currentPage, this.pageSize).subscribe(resp => {
+      if (resp) {
+        this.listUsuarios = resp.content;
       }
     });
   }
+  
 
   save(){
     this.usuarioService.saveUsuarios(this.formUsuario.value).subscribe(resp => {
@@ -90,5 +94,10 @@ export class UsuariosComponent implements OnInit {
   cancelar(){
     this.showModalActualizarUsuario = false;
     this.showModalEliminarUsuario = false;
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.list();
   }
 }
