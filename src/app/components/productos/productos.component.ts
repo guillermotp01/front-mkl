@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductoModel} from '../../model/productos-model';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductosService } from '../../service/productos.service';
 import { ColorModel } from '../../model/colores-model';
 import { TallaModel } from '../../model/tallas-model';
@@ -17,14 +17,16 @@ export class ProductosComponent {
   showModalActualizarProducto: boolean = false;
   showModalEliminarProducto: boolean = false;
   idProductoEliminar: number = 0;
-  selectedColor: string = ''; 
   formProducto: FormGroup = new FormGroup({});
   producto: ProductoModel = new ProductoModel();
   nuevoColor: ColorModel = new ColorModel();
   nuevaTalla: TallaModel = new TallaModel();
+  selectedColorMap: { [productId: number]: string } = {}; // mapea el color de cada producto
+  selectedTallasMap: { [productId: number]: TallaModel[] } = {}; // mapea la talla de cada producto
 
+  //paginacion numero de pagina y cantidad para cada pagina
   currentPage: number = 0;
-  pageSize: number = 6; 
+  pageSize: number = 4; 
 
   constructor(private productoService: ProductosService, private fb: FormBuilder) {
   
@@ -71,11 +73,10 @@ export class ProductosComponent {
   }
 
   update() {
-    const productoId = this.formProducto.value.idProducto;
-    this.productoService.updateProducto(productoId, this.formProducto.value).subscribe(resp => {
+    const productoId = this.producto.idProducto;
+    this.productoService.updateProducto(productoId, this.producto).subscribe(resp => {
         if (resp) {
           this.list();
-          this.formProducto.reset();
         }
       });
     this.showModalActualizarProducto = false;
@@ -126,6 +127,7 @@ export class ProductosComponent {
     this.showModalActualizarProducto = false;
     this.showModalEliminarProducto = false;
   }
+  
   getCodigoBarras(idProducto: number): string {
     return `1826${idProducto}237`;
   }
@@ -140,33 +142,22 @@ export class ProductosComponent {
   }
 
   onColorSelected(event: any, productoId: number) {
-    this.selectedColor = event.target.value;
+    const selectedColor = event.target.value;
 
-    this.formProducto.patchValue({
-      selectedColor: this.selectedColor,
-    });
+    this.selectedColorMap[productoId] = selectedColor;
+    const selectedTallas = this.getTallasPorColor(productoId, selectedColor);
 
-    const coloresArray = this.formProducto.get('colores') as FormArray;
-
-    if (coloresArray.length > 0) {
-      const tallasArray = (coloresArray.at(0).get('tallas') as FormArray) || new FormArray([]);
-
-      tallasArray.clear();
-
-      const selectedTallas = this.getTallasPorColor(productoId, this.selectedColor);
-
-      for (const talla of selectedTallas) {
-        const tallaGroup = this.fb.group({
-          talla: [talla.talla],
-          cantidad: [talla.cantidad],
-        });
-        tallasArray.push(tallaGroup);
-      }
-    }
+    this.selectedTallasMap[productoId] = selectedTallas;
   }
 
   onPageChange(page: number) {
     this.currentPage = page;
     this.list();
+  }
+
+  isNavCollapsed = true;
+
+  onNavToggled(isCollapsed: boolean) {
+    this.isNavCollapsed = isCollapsed;
   }
 }
