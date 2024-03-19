@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './realizar-venta.component.css'
 })
 export class RealizarVentaComponent {
+  isNavCollapsed = true;
 
+  onNavToggled(isCollapsed: boolean) {
+    this.isNavCollapsed = isCollapsed;
+  }
 }

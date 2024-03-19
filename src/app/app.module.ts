@@ -4,17 +4,24 @@ import { BrowserModule} from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule} from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 import { NavegacionComponent } from './components/navegacion/navegacion.component';
 import { PrincipalComponent } from './components/principal/principal.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { RealizarVentaComponent } from './components/realizar-venta/realizar-venta.component';
 import { ListarVentasComponent } from './components/listar-ventas/listar-ventas.component';
-import { BodyComponent } from './components/body/body.component';
-import { SesionComponent } from './components/sesion/sesion.component';
-import { RegistroComponent } from './components/registro/registro.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { authInterceptorProviders } from './service/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,18 +32,22 @@ import { RegistroComponent } from './components/registro/registro.component';
     ProductosComponent,
     RealizarVentaComponent,
     ListarVentasComponent,
-    BodyComponent,
-    SesionComponent,
-    RegistroComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
     FormsModule 
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

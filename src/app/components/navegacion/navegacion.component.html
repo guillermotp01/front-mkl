@@ -1,19 +1,64 @@
-<nav class="sidenav close" [ngClass]="collapsed ? 'sidenav-collapsed': ''">     
+<nav class="sidenav close" [ngClass]="{'open': !isNavCollapsed}">     
     <div class="logo-container">
-        <button class="logo" (click)="toggleCollapsed()">
+        <button class="logo" (click)="toggleNav()">
             <i class="bx bx-menu"></i>
         </button>
-        <div class="logo-text" *ngIf="collapsed">
+        <div class="logo-text" *ngIf="!isNavCollapsed">
             <span>MKL</span>
         </div>
     </div>
     <ul class="sidenav-nav">
-        <li class="sidenav-nav-item" *ngFor="let data of navData">
-            <a class="sidenav-nav-link" [routerLink]="[data.routeLink]"
+        <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link" [routerLink]="'/dashboard'"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact: true}">
-                <i class="sidenav-link-icon" [class]="data.icon"></i>
-                <span class="sidenav-link-text" *ngIf="collapsed">{{data.label}}</span>
+                <i class="bx bx-home-alt icon sidenav-link-icon"></i>
+                <span class="sidenav-link-text" *ngIf="!isNavCollapsed">Inicio</span>
+            </a>
+        </li>
+
+        <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link" [routerLink]="'/usuarios'"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="bx bx-user icon sidenav-link-icon"></i>
+                <span class="sidenav-link-text" *ngIf="!isNavCollapsed">Usuarios</span>
+            </a>
+        </li>
+
+        <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link" [routerLink]="'/productos'"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="bx bx-package icon sidenav-link-icon"></i>
+                <span class="sidenav-link-text" *ngIf="!isNavCollapsed">Productos</span>
+            </a>
+        </li>
+
+        <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link" [routerLink]="'/realizarVenta'"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="bx bx-shopping-bag icon sidenav-link-icon"></i>
+                <span class="sidenav-link-text" *ngIf="!isNavCollapsed">Realizar Venta</span>
+            </a>
+        </li>
+
+        <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link" [routerLink]="'/listarVenta'"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="bx bx-list-check icon sidenav-link-icon"></i>
+                <span class="sidenav-link-text" *ngIf="!isNavCollapsed">Ventas</span>
+            </a>
+        </li>
+
+        <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link" (click)="logout()"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="bx bx-log-out icon sidenav-link-icon"></i>
+                <span class="sidenav-link-text" *ngIf="!isNavCollapsed">Cerrar Sesión</span>
             </a>
         </li>
     </ul>

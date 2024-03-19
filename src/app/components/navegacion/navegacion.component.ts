@@ -1,5 +1,6 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { navbarData } from './nav-data';
+import { LoginService } from '../../service/login.service';
+import { Router } from '@angular/router';;
 
 interface SideBarToggle {
   screenWidth: number;
@@ -9,41 +10,27 @@ interface SideBarToggle {
 @Component({
   selector: 'app-navegacion',
   templateUrl: './navegacion.component.html',
-  styleUrls: ['./navegacion.component.css']
+  styleUrl: './navegacion.component.css'
 })
 export class NavegacionComponent implements OnInit {
 
-  @Output() onToggleSideBar: EventEmitter<SideBarToggle> = new EventEmitter();
-  collapsed = false
-  screenWidth = 0;
-  navData = navbarData;
+  constructor(public loginService: LoginService, private router: Router){
+  
+  }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.screenWidth = window.innerWidth;
-    if (this.screenWidth <= 768) {
-      this.collapsed = false;
-      this.onToggleSideBar.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
-    }
+  public logout(){
+    this.loginService.logout();
+    this.router.navigate(['/login']);
+  }
+
+  @Output() navToggled = new EventEmitter<boolean>();
+  isNavCollapsed = true;
+
+  toggleNav() {
+    this.isNavCollapsed = !this.isNavCollapsed;
+    this.navToggled.emit(this.isNavCollapsed);
   }
 
   ngOnInit(): void {
-    this.setScreenWidth();
-  }
-
-  toggleCollapsed(): void {
-    this.collapsed = !this.collapsed;
-    this.onToggleSideBar.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
-  }
-
-  closeSidenav(): void {
-    this.collapsed = false;
-    this.onToggleSideBar.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
-  }
-
-  private setScreenWidth(): void {
-    if (typeof window !== 'undefined') {
-      this.screenWidth = window.innerWidth;
-    }
   }
 }

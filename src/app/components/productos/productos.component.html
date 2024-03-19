@@ -1,161 +1,166 @@
-<div [ngClass]="{'modal-background-blur': showModalActualizarProducto || showModalEliminarProducto}">    
+<app-navegacion (navToggled)="onNavToggled($event)"></app-navegacion>
 
-    <div class="text">
-        <h1>Inventario</h1>    
-    </div>
-    
-    <div class="text herramientas">
-        <div>
-            <i class='bx bx-search icon' ></i>
-            <span>Buscar...</span>
+<main class="home" [ngClass]="{'shifted': !isNavCollapsed}">
+    <div [ngClass]="{'modal-background-blur': showModalActualizarProducto || showModalEliminarProducto}">    
+
+        <div class="text">
+            <h1>Inventario</h1>    
         </div>
-    
-        <div>
-            <i class='bx bx-filter icon'></i>
-            <span>Filtrar</span>
-        </div>
-    </div>
-    
-    <div class="text agregar">
-        <span>
-            <i class='bx bx-error icon'></i>
-            Seleccione un color para visualizar el stock actual
-        </span>
-        <a class="button" (click)="newProducto()">Agregar Producto</a>
-    </div>
-    
-    <section class="text productos">
-        <div class="producto" *ngFor="let producto of listProductos">
-            <div class="detalle-usuario">
-                <span class="info-usuario">
-                    <h3>{{producto.nombre}}</h3>
-                </span>
-                <span>
-                    <a class="button" (click)="modalActualizar(producto)">
-                        <i class='bx bx-edit icon'></i>
-                    </a>
-                    <a class="button" (click)="modalEliminar(producto.idProducto)">
-                        <i class='bx bx-trash icon'></i>
-                    </a>
-                </span>
-            </div>
+        
+        <div class="text herramientas">
             <div>
-                <span>{{producto.descripcion}}</span>
+                <i class='bx bx-search icon' ></i>
+                <span>Buscar...</span>
             </div>
-    
-            <div class="detalle-producto">
-                <span>Cod. Prod: {{producto.idProducto}}</span>
-    
-                <span>Color: 
-                    <select id="colores" (change)="onColorSelected($event, producto.idProducto)">
-                        <option disabled selected value="selecciona">--Color--</option>
-                        <option *ngFor="let color of producto.colores" [value]="color.nombre">{{ color.nombre }}</option>
-                    </select>
-                </span>
-    
-                <span>Precio: S/. {{producto.precio}}</span>
-            
-                <span>Código de Barras: {{getCodigoBarras(producto.idProducto)}}</span>
-            </div>
-            
-            <div *ngIf="selectedColor">
-                <table class="tabla-tallas">
-                    <tr class="tabla-titulo">
-                        <th *ngFor="let talla of getTallasPorColor(producto.idProducto, selectedColor)">{{ talla.talla }}</th>
-                    </tr>
-                    <tr class="tabla-detalles">
-                        <td *ngFor="let talla of getTallasPorColor(producto.idProducto, selectedColor)">{{ talla.cantidad }}</td>
-                    </tr>
-                </table>
+        
+            <div>
+                <i class='bx bx-filter icon'></i>
+                <span>Filtrar</span>
             </div>
         </div>
-    </section>
-
-    <div class="pagination">
-        <button class="btn-pagination" [disabled]="currentPage === 0" (click)="onPageChange(currentPage - 1)">Anterior</button>
-        <span>{{ currentPage + 1 }}</span>
-        <button class="btn-pagination" [disabled]="listProductos.length < pageSize" (click)="onPageChange(currentPage + 1)">Siguiente</button>
-    </div>
-</div>
-
-    <!-- MODAL PARA ACTUALIZAR PRODUCTO -->
-    <div class="modal" *ngIf="showModalActualizarProducto">
-        <div class="modal-content text">
-            <div class="modal-header">
-                <h2 *ngIf="updateMode">Actualizar Producto</h2>
-                <h2 *ngIf="!updateMode">Guardar Producto</h2>
-            </div>
-            <div class="modal-body">
-                <div class="forms">
-                    <div>
-                        <div class="form-content">
-                            <label for="nombre">Nombre:</label>
-                            <input [(ngModel)]="producto.nombre" id="nombre" name="nombre" />
-                        </div>
-    
-                        <div class="form-content">
-                            <label for="colorNombre">Color:</label>
-                            <input [(ngModel)]="nuevoColor.nombre" id="colorNombre" name="colorNombre" />
-                        </div>
-                    </div>
-                    <div>
-                        <div class="form-content">
-                            <label for="descripcion">Desc:</label>
-                            <input [(ngModel)]="producto.descripcion" id="descripcion" name="descripcion" />
-                        </div>
-    
-                        <div class="form-content">
-                            <label for="precio">Precio:</label>
-                            <input type="number" [(ngModel)]="producto.precio" id="precio" name="precio" />
-                        </div>
-                    </div>
+        
+        <div class="text agregar">
+            <span>
+                <i class='bx bx-error icon'></i>
+                Seleccione un color para visualizar el stock actual
+            </span>
+            <a class="button" (click)="newProducto()">Agregar Producto</a>
+        </div>
+        
+        <section class="text productos">
+            <div class="producto" *ngFor="let producto of listProductos">
+                <div class="detalle-usuario">
+                    <span class="info-usuario">
+                        <h3>{{producto.nombre}}</h3>
+                    </span>
+                    <span>
+                        <a class="button" (click)="modalActualizar(producto)">
+                            <i class='bx bx-edit icon'></i>
+                        </a>
+                        <a class="button" (click)="modalEliminar(producto.idProducto)">
+                            <i class='bx bx-trash icon'></i>
+                        </a>
+                    </span>
                 </div>
                 <div>
-                    <div class="form-content">
-                        <a class="button" (click)="agregarColor()">Agregar Color</a>
-                    </div>
-                    <div *ngFor="let color of producto.colores">
-                        <div class="form-content">
-                            <label>
-                                <strong>Color: {{ color.nombre }}</strong>
-                            </label>
-                            <a  class="button" (click)="agregarTalla(color)">Agregar Talla</a>
-                        </div>
-                        <div class="form-content" *ngFor="let talla of color.tallas; let i = index">
-                            
-                            <div class="form-content">
-                                <label for="talla{{i}}">Talla:</label>
-                                <input [(ngModel)]="talla.talla" id="talla{{i}}" name="talla{{i}}" />
-                            </div>
+                    <span>{{producto.descripcion}}</span>
+                </div>
+        
+                <div class="detalle-producto">
+                    <span>Cod. Prod: {{producto.idProducto}}</span>
+        
+                    <span>Color: 
+                        <select id="colores" (change)="onColorSelected($event, producto.idProducto)">
+                            <option disabled selected value="selecciona">--Color--</option>
+                            <option *ngFor="let color of producto.colores" [value]="color.nombre">{{ color.nombre }}</option>
+                        </select>
+                    </span>
+        
+                    <span>Precio: S/. {{producto.precio}}</span>
+                
+                    <span>Código de Barras: {{getCodigoBarras(producto.idProducto)}}</span>
+                </div>
+                
+                <div *ngIf="selectedColorMap[producto.idProducto] && selectedTallasMap[producto.idProducto]">
+                    <table class="tabla-tallas">
+                        <tr class="tabla-titulo">
+                            <th *ngFor="let talla of selectedTallasMap[producto.idProducto]">{{ talla.talla }}</th>
+                        </tr>
+                        <tr class="tabla-detalles">
+                            <td *ngFor="let talla of selectedTallasMap[producto.idProducto]">{{ talla.cantidad }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
     
+        <div class="pagination">
+            <button class="btn-pagination" [disabled]="currentPage === 0" (click)="onPageChange(currentPage - 1)">Anterior</button>
+            <span>{{ currentPage + 1 }}</span>
+            <button class="btn-pagination" [disabled]="listProductos.length < pageSize" (click)="onPageChange(currentPage + 1)">Siguiente</button>
+        </div>
+    </div>
+    
+        <!-- MODAL PARA ACTUALIZAR PRODUCTO -->
+        <div class="modal" *ngIf="showModalActualizarProducto">
+            <div class="modal-content text">
+                <div class="modal-header">
+                    <h2 *ngIf="updateMode">Actualizar Producto</h2>
+                    <h2 *ngIf="!updateMode">Guardar Producto</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="forms">
+                        <div>
                             <div class="form-content">
-                                <label for="cantidad{{i}}">Cantidad:</label>
-                                <input type="number" [(ngModel)]="talla.cantidad" id="cantidad{{i}}" name="cantidad{{i}}" />
+                                <label for="nombre">Nombre:</label>
+                                <input [(ngModel)]="producto.nombre" id="nombre" name="nombre" />
+                            </div>
+        
+                            <div class="form-content">
+                                <label for="colorNombre">Color:</label>
+                                <input [(ngModel)]="nuevoColor.nombre" id="colorNombre" name="colorNombre" />
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-content">
+                                <label for="descripcion">Desc:</label>
+                                <input [(ngModel)]="producto.descripcion" id="descripcion" name="descripcion" />
+                            </div>
+        
+                            <div class="form-content">
+                                <label for="precio">Precio:</label>
+                                <input type="number" [(ngModel)]="producto.precio" id="precio" name="precio" />
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <div class="form-content">
+                            <a class="button" (click)="agregarColor()">Agregar Color</a>
+                        </div>
+                        <div *ngFor="let color of producto.colores">
+                            <div class="form-content">
+                                <label>
+                                    <strong>Color: {{ color.nombre }}</strong>
+                                </label>
+                                <a  class="button" (click)="agregarTalla(color)">Agregar Talla</a>
+                            </div>
+                            <div class="form-content" *ngFor="let talla of color.tallas; let i = index">
+                                
+                                <div class="form-content">
+                                    <label for="talla{{i}}">Talla:</label>
+                                    <input [(ngModel)]="talla.talla" id="talla{{i}}" name="talla{{i}}" />
+                                </div>
+        
+                                <div class="form-content">
+                                    <label for="cantidad{{i}}">Cantidad:</label>
+                                    <input type="number" [(ngModel)]="talla.cantidad" id="cantidad{{i}}" name="cantidad{{i}}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="button" (click)="cancelar()">Cancelar</a>
+                        <a *ngIf="!updateMode" class="button" (click)="save()">Guardar</a>
+                        <a *ngIf="updateMode" class="button" (click)="update()">Actualizar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <!-- MODAL PARA ELIMINAR USUARIO -->
+        <div class="modal" *ngIf="showModalEliminarProducto">
+            <div class="modal-content text">
+                <div class="modal-header">
+                    <i class='bx bx-error'></i>
+                    <h2>¿Deseas eliminar este Producto?</h2>
                 </div>
                 <div class="modal-footer">
-                    <a class="button" (click)="cancelar()">Cancelar</a>
-                    <a *ngIf="!updateMode" class="button" (click)="save()">Guardar</a>
-                    <a *ngIf="updateMode" class="button" (click)="update()">Actualizar</a>
+                    <a class="button" (click)="delete()">Sí</a>
+                    <a class="button" (click)="cancelar()">No</a>
                 </div>
             </div>
         </div>
-    </div>
     
-    
-    
-    <!-- MODAL PARA ELIMINAR USUARIO -->
-    <div class="modal" *ngIf="showModalEliminarProducto">
-        <div class="modal-content text">
-            <div class="modal-header">
-                <i class='bx bx-error'></i>
-                <h2>¿Deseas eliminar este Producto?</h2>
-            </div>
-            <div class="modal-footer">
-                <a class="button" (click)="delete()">Sí</a>
-                <a class="button" (click)="cancelar()">No</a>
-            </div>
-        </div>
-    </div>
+</main>

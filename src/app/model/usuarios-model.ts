@@ -1,6 +1,9 @@
 export class UsuariosModel{
-    idUsuario: number = 0;
+    id: number = 0;
+    username: string = "";
+    apellido: string = "";
     nombre: string = "";
-    correo: string = "";
+    email: string = "";
+    telefono: number = 0;
     password: string = "";
 }

@@ -24,7 +24,14 @@ export class AppComponent {
     this.isSideNavCollapsed = data.collapsed;
   }
 
+  toggleSidebar(event: any): void {
+    this.isSideNavCollapsed = event.collapsed;
+  }
+
   isCurrentRoute(route: string): boolean {
     return this.router.url.includes(route);
+  }
+  showNavbar(): boolean {
+    return this.router.url !== '/login' && this.router.url !== '/signup';
   }
 }

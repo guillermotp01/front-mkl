@@ -18,6 +18,7 @@ export class UsuariosComponent implements OnInit {
   formUsuario: FormGroup = new FormGroup({});
   currentPage: number = 0;
   pageSize: number = 6; 
+  isNavCollapsed = true;
 
   constructor(private usuarioService: UsuariosService) {
   
@@ -26,9 +27,11 @@ export class UsuariosComponent implements OnInit {
   ngOnInit(): void {
     this.list();
     this.formUsuario = new FormGroup({
-      idUsuario: new FormControl(''),
+      id: new FormControl(''),
       nombre: new FormControl(''),
-      correo: new FormControl(''),
+      apellido: new FormControl(''),
+      email: new FormControl(''),
+      telefono: new FormControl(''),
       password: new FormControl(''),
     });
   }
@@ -43,17 +46,8 @@ export class UsuariosComponent implements OnInit {
   }
   
 
-  save(){
-    this.usuarioService.saveUsuarios(this.formUsuario.value).subscribe(resp => {
-      if(resp){
-        this.list();
-        this.formUsuario.reset();
-      }
-    })
-  }
-
   update() {
-    const userId = this.formUsuario.value.idUsuario;
+    const userId = this.formUsuario.value.id;
     this.usuarioService.updateUsuario(userId, this.formUsuario.value).subscribe(resp => {
         if (resp) {
           this.list();
@@ -79,9 +73,11 @@ export class UsuariosComponent implements OnInit {
   modalActualizar(item: any){
     this.showModalActualizarUsuario = true;
     this.showModalEliminarUsuario = false;
-    this.formUsuario.controls['idUsuario'].setValue(item.idUsuario);
+    this.formUsuario.controls['id'].setValue(item.id);
     this.formUsuario.controls['nombre'].setValue(item.nombre);
-    this.formUsuario.controls['correo'].setValue(item.correo);
+    this.formUsuario.controls['apellido'].setValue(item.apellido);
+    this.formUsuario.controls['email'].setValue(item.email);
+    this.formUsuario.controls['telefono'].setValue(item.telefono);
     this.formUsuario.controls['password'].setValue(item.password);
   }
 
@@ -99,5 +95,10 @@ export class UsuariosComponent implements OnInit {
   onPageChange(page: number) {
     this.currentPage = page;
     this.list();
+  }
+
+
+  onNavToggled(isCollapsed: boolean) {
+    this.isNavCollapsed = isCollapsed;
   }
 }

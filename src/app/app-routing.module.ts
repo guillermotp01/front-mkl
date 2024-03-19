@@ -5,18 +5,51 @@ import { PrincipalComponent } from './components/principal/principal.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { RealizarVentaComponent } from './components/realizar-venta/realizar-venta.component';
 import { ListarVentasComponent } from './components/listar-ventas/listar-ventas.component';
-import { SesionComponent } from './components/sesion/sesion.component';
-import { RegistroComponent } from './components/registro/registro.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { LoginComponent } from './pages/login/login.component';
+import { NormalGuard } from './service/normal.guard';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'cerrarSesion', pathMatch: 'full'},
-  {path: 'dashboard', component: PrincipalComponent},
-  {path: 'usuarios', component: UsuariosComponent},
-  {path: 'productos', component: ProductosComponent},
-  {path: 'realizarVenta', component: RealizarVentaComponent},
-  {path: 'listarVenta', component: ListarVentasComponent},
-  {path: 'cerrarSesion',component: SesionComponent},
-  {path: 'registro', component: RegistroComponent }
+  {
+    path: 'dashboard', 
+    component: PrincipalComponent ,
+    pathMatch: 'full',
+    canActivate:[NormalGuard],
+  },
+  {
+    path: 'usuarios', 
+    component: UsuariosComponent ,
+    pathMatch: 'full',
+    canActivate:[NormalGuard],
+  },
+  {
+    path: 'productos', 
+    component: ProductosComponent ,
+    pathMatch: 'full',
+    canActivate:[NormalGuard],
+  },
+  {
+    path: 'realizarVenta', 
+    component: RealizarVentaComponent ,
+    pathMatch: 'full',
+    canActivate:[NormalGuard]
+  },
+  {
+    path: 'listarVenta', 
+    component: ListarVentasComponent ,
+    pathMatch: 'full',
+    canActivate:[NormalGuard]
+  },
+  {
+    path: 'signup', 
+    component: SignupComponent ,
+    pathMatch: 'full',
+  },
+  {
+    path: 'login', 
+    component: LoginComponent ,
+    pathMatch: 'full',
+  }
 ];
 
 @NgModule({

@@ -1,159 +1,163 @@
-<div class="text">
-    <h1>Ventas</h1>    
-</div>
+<app-navegacion (navToggled)="onNavToggled($event)"></app-navegacion>
 
-<section class="text ventas">
-    <div class="contenido">
-        <div class="datos">
-            <div class="datos-cliente">
-                <h4>Datos Cliente</h4>
+<main class="home"  [ngClass]="{'shifted': !isNavCollapsed}">
+    <div class="text">
+        <h1>Ventas</h1>    
+    </div>
     
-                <div class="form-venta">
-                    <label >Nombre:</label>
-                    <input id="nombre" name="nombre" />
-                </div>
+    <section class="text ventas">
+        <div class="contenido">
+            <div class="datos">
+                <div class="datos-cliente">
+                    <h4>Datos Cliente</h4>
         
-                <div class="form-venta">
-                    <label>Direccion:</label>
-                    <input id="direccion" name="direccion" />
+                    <div class="form-venta">
+                        <label >Nombre:</label>
+                        <input id="nombre" name="nombre" />
+                    </div>
+            
+                    <div class="form-venta">
+                        <label>Direccion:</label>
+                        <input id="direccion" name="direccion" />
+                    </div>
+            
+                    <div class="form-venta">
+                        <label>Telefono:</label>
+                        <input id="telefono" name="telefono" />
+                    </div>
+            
+                    <div class="form-venta">
+                        <label>Documento:</label>
+                        <select name="" id="">
+                            <option value="">RUC</option>
+                            <option value="">DNI</option>
+                            <option value="">Carnet de Extranjeria</option>
+                        </select>
+                        <input id="documento" name="documento" />
+                    </div>
+            
+                    <div class="form-venta">
+                        <label>Tipo:</label>
+                        <select name="" id="">
+                            <option value="">Empresa</option>
+                            <option value="">Persona</option>
+                        </select>
+                    </div>
                 </div>
+            
+                <div class="datos-producto">
+                    <h4>Datos Producto</h4>
         
-                <div class="form-venta">
-                    <label>Telefono:</label>
-                    <input id="telefono" name="telefono" />
-                </div>
-        
-                <div class="form-venta">
-                    <label>Documento:</label>
-                    <select name="" id="">
-                        <option value="">RUC</option>
-                        <option value="">DNI</option>
-                        <option value="">PASAPORTE</option>
-                    </select>
-                    <input id="documento" name="documento" />
-                </div>
-        
-                <div class="form-venta">
-                    <label>Tipo:</label>
-                    <select name="" id="">
-                        <option value="">Empresa</option>
-                        <option value="">Persona</option>
-                    </select>
+                    <div class="form-venta">
+                        <label >Nombre:</label>
+                        <select name="" id="">
+                            <option value="">Producto1</option>
+                            <option value="">Producto2</option>
+                        </select>
+                    </div>
+            
+                    <div class="form-venta">
+                        <label>Color</label>
+                        <select name="" id="">
+                            <option value="">Color1</option>
+                            <option value="">Color2</option>
+                        </select>
+                    </div>
+            
+                    <div class="form-venta">
+                        <label>Talla:</label>
+                        <select name="" id="">
+                            <option value="">Talla1</option>
+                            <option value="">Talla2</option>
+                        </select>
+                    </div>
+    
+                    <div class="form-venta">
+                        <label>Stock Actual:</label>
+                        <label for="">5</label>
+                    </div>
+            
+                    <div class="form-venta">
+                        <label>Cantidad:</label>
+                        <input id="cantidad" name="cantidad" />
+                    </div>
+            
+                    <div class="acciones">
+                        <a class="button" href="">Agregar Producto</a>
+                    </div>
                 </div>
             </div>
-        
-            <div class="datos-producto">
-                <h4>Datos Producto</h4>
     
-                <div class="form-venta">
-                    <label >Nombre:</label>
-                    <select name="" id="">
-                        <option value="">Producto1</option>
-                        <option value="">Producto2</option>
-                    </select>
-                </div>
-        
-                <div class="form-venta">
-                    <label>Color</label>
-                    <select name="" id="">
-                        <option value="">Color1</option>
-                        <option value="">Color2</option>
-                    </select>
-                </div>
-        
-                <div class="form-venta">
-                    <label>Talla:</label>
-                    <select name="" id="">
-                        <option value="">Talla1</option>
-                        <option value="">Talla2</option>
-                    </select>
-                </div>
-
-                <div class="form-venta">
-                    <label>Stock Actual:</label>
-                    <label for="">5</label>
-                </div>
-        
-                <div class="form-venta">
-                    <label>Cantidad:</label>
-                    <input id="cantidad" name="cantidad" />
-                </div>
-        
-                <div class="acciones">
-                    <a class="button" href="">Agregar Producto</a>
-                </div>
+            <h4>Productos Seleccionados</h4>
+    
+            <div class="lista-productos">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>SubTotal</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>P001</td>
+                            <td>Polo</td>
+                            <td>2</td>
+                            <td>S/.50</td>
+                            <td>S/.100</td>
+                            <td>
+                                <a class="button" href="">
+                                    <i class='bx bx-trash icon'></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>P002</td>
+                            <td>Short</td>
+                            <td>2</td>
+                            <td>S/.50</td>
+                            <td>S/.100</td>
+                            <td>
+                                <a class="button" href="">
+                                    <i class='bx bx-trash icon'></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>P003</td>
+                            <td>Camisa</td>
+                            <td>2</td>
+                            <td>S/.50</td>
+                            <td>S/.100</td>
+                            <td>
+                                <a class="button" href="">
+                                    <i class='bx bx-trash icon'></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>P004</td>
+                            <td>Pantalon</td>
+                            <td>2</td>
+                            <td>S/.50</td>
+                            <td>S/.100</td>
+                            <td>
+                                <a class="button" href="">
+                                    <i class='bx bx-trash icon'></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-
-        <h4>Productos Seleccionados</h4>
-
-        <div class="lista-productos">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Nombre</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                        <th>SubTotal</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>P001</td>
-                        <td>Polo</td>
-                        <td>2</td>
-                        <td>S/.50</td>
-                        <td>S/.100</td>
-                        <td>
-                            <a class="button" href="">
-                                <i class='bx bx-trash icon'></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>P002</td>
-                        <td>Short</td>
-                        <td>2</td>
-                        <td>S/.50</td>
-                        <td>S/.100</td>
-                        <td>
-                            <a class="button" href="">
-                                <i class='bx bx-trash icon'></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>P003</td>
-                        <td>Camisa</td>
-                        <td>2</td>
-                        <td>S/.50</td>
-                        <td>S/.100</td>
-                        <td>
-                            <a class="button" href="">
-                                <i class='bx bx-trash icon'></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>P004</td>
-                        <td>Pantalon</td>
-                        <td>2</td>
-                        <td>S/.50</td>
-                        <td>S/.100</td>
-                        <td>
-                            <a class="button" href="">
-                                <i class='bx bx-trash icon'></i>
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="acciones">
+            <a class="button" href="">Limpiar Datos</a>
+            <a class="button" href="">Realizar Venta</a>
         </div>
-    </div>
-    <div class="acciones">
-        <a class="button" href="">Limpiar Datos</a>
-        <a class="button" href="">Realizar Venta</a>
-    </div>
-</section>
+    </section>
+</main>

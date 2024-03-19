@@ -9,12 +9,13 @@ import { ListarVentasService } from '../../service/listar-ventas.service';
 export class ListarVentasComponent {
   currentPage: number = 0;
   pageSize: number = 6; 
-
+  isNavCollapsed = true;
+  
   constructor(private ventasService: ListarVentasService){
   
   }
 
-
-
-  
+  onNavToggled(isCollapsed: boolean) {
+    this.isNavCollapsed = isCollapsed;
+  }
 }

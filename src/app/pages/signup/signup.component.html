@@ -1,0 +1,30 @@
+<section class="signup">
+    <div class="container" id="container" >
+        <div class="form-container sign-up">
+            <form (ngSubmit)="formSubmit()">
+                <h1>Crear Cuenta</h1>
+                <span>Registrate aquí</span>
+
+                <input required [(ngModel)]="user.nombre"  type="text" name="nombre"  placeholder="Nombre">
+                <input required [(ngModel)]="user.apellido"  type="text" name="apellido" placeholder="Apellido">
+                <input required [(ngModel)]="user.username" type="text" name="username" placeholder="Nombre de Usuario">
+                <input required [(ngModel)]="user.password" type="password" name="password" placeholder="Contraseña">
+                <input required [(ngModel)]="user.email" type="email" name="correo" placeholder="Correo">
+                <input required [(ngModel)]="user.telefono" type="number" name="telefono" placeholder="Telefono">
+                <button >Registrar</button>
+            </form>
+        </div>
+
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-right">
+                    <h1>Bienvenido</h1>
+                    <p>Ingrese con sus detalles personales</p>
+                    <button [routerLink]="'/login'" class="hidden" id="login">
+                    Ingresar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
